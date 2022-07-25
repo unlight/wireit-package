@@ -1,4 +1,5 @@
 module.exports = {
+  extends: ['semantic-release-commit-filter'],
   plugins: [
     [
       '@semantic-release/commit-analyzer',
@@ -16,7 +17,7 @@ module.exports = {
     [
       '@semantic-release/npm',
       {
-        pkgRoot: 'dist',
+        pkgRoot: './dist',
       },
     ],
     '@semantic-release/github',

@@ -1,45 +1,14 @@
 {
-  "name": "wireit-update-package",
+  "name": "wireit-update-package-projects",
+  "private": true,
   "version": "0.0.0-dev",
-  "license": "Unlicense",
-  "description": "Update wireit scripts across your workspace packages",
   "keywords": [
     "wireit",
     "workspace"
   ],
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "scripts": {
-    "test": "npm run eslint && npm run tscheck && npm run test:cov",
-    "test:r": "npm run mocha -- src/**/*.spec.ts",
-    "test:cov": "c8 --reporter text --exclude \"**/*.spec.ts\" --exclude \"**/testing/**\"  npm run test:r -- --no-timeouts",
-    "test:w": "npm run test:r -- --watch-files src --watch",
-    "lint": "npm run eslint && npm run tscheck",
-    "eslint": "node node_modules/eslint/bin/eslint \"src/**/*.{ts,tsx}\"",
-    "eslint:w": "watchexec -w src \"npm run eslint\"",
-    "eslint:fix": "npm run eslint -- --fix",
-    "tscheck": "tsc --noEmit",
-    "tscheck:w": "npm run tscheck -- --watch",
-    "lint:fix": "npm run eslint:fix && npm run lint:doc:fix",
-    "format:src": "prettier src --write",
-    "commit_lint": "sh Taskfile commit_lint",
-    "commit": "cz",
-    "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
-    "build": "sh Taskfile build_pkgroll",
-    "lint:w": "run-p tscheck:w eslint:w",
-    "test:m": "node node_modules/@stryker-mutator/core/bin/stryker.js run",
-    "mocha": "node -r ts-node/register node_modules/mocha/bin/mocha",
-    "test:d": "ndb -r ts-node/register node_modules/mocha/bin/mocha src/**/*.spec.ts --watch-files src --watch --no-timeouts"
-  },
-  "peerDependencies": {},
-  "config": {},
+  "workspaces": [
+    "packages/wireit-update-package"
+  ],
   "devDependencies": {
     "@commitlint/cli": "17.0.3",
     "@commitlint/config-conventional": "17.0.3",
@@ -76,6 +45,7 @@
     "prettier": "^2.7.1",
     "request": "^2.88.2",
     "semantic-release": "^19.0.3",
+    "semantic-release-commit-filter": "^1.0.2",
     "simplytyped": "^3.3.0",
     "tsconfig-paths": "^4.0.0",
     "tslib": "^2.4.0",

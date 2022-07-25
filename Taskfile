@@ -8,13 +8,15 @@ build_pkgroll() {
   mkdir dist
   # https://esbuild.github.io/api/#target
   npx pkgroll --target=es2020
-  cp -f README.md LICENSE dist
+  cp -f README.md dist
   cat package.json | jq '.main = "./index.cjs"' |
     jq '.module = "./index.mjs"' |
     jq '.types = "./index.d.ts"' |
+    jq '.bin = "./cli.mjs"' |
     jq '.exports.".".import = "./index.mjs"' |
     jq '.exports.".".require = "./index.cjs"' \
       >dist/package.json
+  rm dist/cli.cjs
   set +x
 }
 
