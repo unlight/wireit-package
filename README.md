@@ -1,8 +1,8 @@
-# wireit-update-package
+# wireit-package projects
 
 ## Packages
 
-- [wireit-update-package](./packages/wireit-update-package)
+- [wireit-package](./packages/wireit-package)
 
 ## Resources
 

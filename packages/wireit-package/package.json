@@ -1,0 +1,55 @@
+{
+  "name": "wireit-package",
+  "version": "0.0.0-dev",
+  "license": "MIT",
+  "description": "Update wireit scripts across your workspace packages",
+  "keywords": [
+    "wireit",
+    "workspace"
+  ],
+  "bin": "./dist/cli.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "test": "npm run eslint && npm run tscheck && npm run test:cov",
+    "test:r": "npm run mocha -- src/**/*.spec.ts",
+    "test:cov": "c8 --reporter text --exclude \"**/*.spec.ts\" --exclude \"**/testing/**\"  npm run test:r -- --no-timeouts",
+    "test:w": "npm run test:r -- --watch-files src --watch",
+    "lint": "npm run eslint && npm run tscheck",
+    "eslint": "node node_modules/eslint/bin/eslint \"src/**/*.{ts,tsx}\"",
+    "eslint:w": "watchexec -w src \"npm run eslint\"",
+    "eslint:fix": "npm run eslint -- --fix",
+    "tscheck": "tsc --noEmit",
+    "tscheck:w": "npm run tscheck -- --watch",
+    "lint:fix": "npm run eslint:fix && npm run lint:doc:fix",
+    "format:src": "prettier src --write",
+    "commit_lint": "sh ../../Taskfile commit_lint",
+    "commit": "cz",
+    "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
+    "build": "sh ../../Taskfile build_pkgroll",
+    "lint:w": "run-p tscheck:w eslint:w",
+    "test:m": "node node_modules/@stryker-mutator/core/bin/stryker.js run",
+    "mocha": "mocha -r ts-node/register"
+  },
+  "dependencies": {
+    "@semrel-extra/topo": "^1.4.2",
+    "cac": "^6.7.12",
+    "read-package-json-fast": "^2.0.3"
+  },
+  "devDependencies": {
+    "@swc/helpers": "^0.4.3",
+    "@types/mocha": "^9.1.1",
+    "expect": "^28.1.3",
+    "mocha": "^10.0.0",
+    "mock-fs": "^5.1.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.0.0"
+  }
+}
