@@ -1,4 +1,4 @@
-name: CI
+name: 'Test / Build / Release'
 on:
   - push
   - pull_request
@@ -37,7 +37,7 @@ jobs:
           npm install
       - name: 'Build'
         run: |
-          npm run build
+          npm run -w packages/wireit-package build
       - name: 'Release'
         run: |
           npx -w packages/wireit-package semantic-release -d
