@@ -92,5 +92,6 @@ describe('update command', () => {
     const { wireit } = JSON.parse(b);
 
     expect(wireit.build.command).toBe('npm run build');
+    expect(wireit.build.dependencies).toEqual(['../a:build']);
   });
 });

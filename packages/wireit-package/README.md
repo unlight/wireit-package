@@ -14,6 +14,8 @@ npm install --save-dev wireit-package
 npx wireit-package update --command "npm run build" --name "build"
 ```
 
+Result:
+
 ```json
 "wireit": {
   "build": {
@@ -23,6 +25,13 @@ npx wireit-package update --command "npm run build" --name "build"
     ]
   }
 }
+```
+
+## Development
+
+```sh
+npm run -w wireit-package test:w
+npm run -w wireit-package build
 ```
 
 ## License
