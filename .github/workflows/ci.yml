@@ -18,7 +18,7 @@ jobs:
         run: npm install
       - name: 'Test'
         run: |
-          npm run -w packages/wireit-package test
+          npm -w wireit-package run test
 
   release:
     name: 'Release'
@@ -37,10 +37,10 @@ jobs:
           npm install
       - name: 'Build'
         run: |
-          npm run -w packages/wireit-package build
+          npm -w wireit-package run build
       - name: 'Release'
         run: |
-          npx -w packages/wireit-package semantic-release -d
+          npx -w wireit-package semantic-release -d
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
