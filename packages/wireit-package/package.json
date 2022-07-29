@@ -44,7 +44,6 @@
     "commit": "cz",
     "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
     "build": "sh ../../Taskfile build_pkgroll",
-    "lint:w": "run-p tscheck:w eslint:w",
     "test:m": "node node_modules/@stryker-mutator/core/bin/stryker.js run",
     "mocha": "mocha -r ts-node/register"
   },
