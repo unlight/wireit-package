@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/unlight/wireit-package/compare/wireit-package-v1.0.0...wireit-package-v1.0.1) (2022-07-29)
+
+
+### Bug Fixes
+
+* Test bump (semantic-release/npm) ([fcd17c4](https://github.com/unlight/wireit-package/commit/fcd17c454064edb928415c116d80c566d8646a62))
+
 ## 1.0.0 (2022-07-29)
 
 
