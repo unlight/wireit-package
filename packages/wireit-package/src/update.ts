@@ -1,7 +1,7 @@
 import { topo } from '@semrel-extra/topo';
+import { promises as fs } from 'fs';
 import path from 'path';
 import readPackageJson from 'read-package-json-fast';
-import { promises as fs } from 'fs';
 
 type UpdateArgs = {
   command: string;

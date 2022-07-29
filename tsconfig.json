@@ -29,6 +29,5 @@
     "lib": ["esnext"],
     "paths": {},
     "plugins": []
-  },
-  "include": ["src"]
+  }
 }

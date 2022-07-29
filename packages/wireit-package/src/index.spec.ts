@@ -1,8 +1,8 @@
+import { topo } from '@semrel-extra/topo';
 import expect from 'expect';
 import fs from 'fs';
-import { topo } from '@semrel-extra/topo';
-import path from 'path';
 import mockFs from 'mock-fs';
+import path from 'path';
 
 import { update } from './index';
 

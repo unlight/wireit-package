@@ -1,4 +1,5 @@
 import { cac } from 'cac';
+
 import { update } from './index';
 
 const cliName = 'wireit-package';

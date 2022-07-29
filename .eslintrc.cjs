@@ -37,7 +37,7 @@ module.exports = {
     'promise',
     'only-warn',
   ],
-  ignorePatterns: ['@generated/**', '*.config.js', '.*rc.js'],
+  ignorePatterns: ['**/dist/**', '**/@generated/**', '*.config.js', '.*rc.js'],
   rules: {
     // core
     'consistent-return': [1, { treatUndefinedAsUnspecified: true }],
