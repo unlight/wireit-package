@@ -192,3 +192,45 @@ describe('sequence', () => {
     });
   });
 });
+
+describe('existing wireit', () => {
+  before(() => {
+    const volume = {
+      '/root/package.json': JSON.stringify({
+        workspaces: ['packages/*'],
+      }),
+      '/root/packages/a/package.json': JSON.stringify({
+        name: 'a',
+      }),
+      '/root/packages/b/package.json': JSON.stringify({
+        name: 'b',
+        dependencies: { a: '*' },
+        wireit: {
+          clean: {
+            command: 'rm *',
+          },
+        },
+      }),
+    };
+    mockFs(volume);
+  });
+
+  after(() => {
+    mockFs.restore();
+  });
+
+  it('update', async () => {
+    await update({
+      command: 'npm run build',
+      name: 'build',
+      cwd: '/root',
+    });
+
+    const b = fs.readFileSync('/root/packages/b/package.json').toString();
+    const { wireit } = JSON.parse(b);
+
+    expect(wireit.clean).toEqual({
+      command: 'rm *',
+    });
+  });
+});

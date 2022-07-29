@@ -27,35 +27,33 @@ export async function update(args: UpdateArgs) {
 
     if (!packageData?.manifest.dependencies) continue;
 
+    const { manifest, absPath, manifestPath } = packageData;
+
+    if (!manifest.dependencies) continue;
+
     const dependencies: string[] = [];
-    const wireit = {
+    const wireit = (manifest['wireit'] as Record<string, unknown> | undefined) || {
       [name]: {
         command,
         dependencies,
       },
     };
 
-    for (const [dependencyName] of Object.entries(packageData.manifest.dependencies)) {
+    for (const [dependencyName] of Object.entries(manifest.dependencies)) {
       const dependencyPackage = result.packages[dependencyName];
 
       if (!dependencyPackage) continue;
 
-      const relative = path.posix.relative(
-        packageData.absPath,
-        dependencyPackage.absPath,
-      );
+      const relative = path.posix.relative(absPath, dependencyPackage.absPath);
 
       dependencies.push(`${relative}:${name}`);
     }
 
     if (dependencies.length > 0) {
-      packageData.manifest['wireit'] = wireit;
+      manifest['wireit'] = wireit;
     }
 
-    await fs.writeFile(
-      packageData.manifestPath,
-      JSON.stringify(packageData.manifest, undefined, 2),
-    );
+    await fs.writeFile(manifestPath, JSON.stringify(manifest, undefined, 2));
   }
 
   return result;
