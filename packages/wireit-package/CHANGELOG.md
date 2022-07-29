@@ -1,0 +1,14 @@
+## 1.0.0 (2022-07-29)
+
+
+### Features
+
+* Check for missing workspace package ([01ccbc8](https://github.com/unlight/wireit-package/commit/01ccbc8d1d621c8132583db1e27fe8010fe77a61))
+* First release ([3d05de4](https://github.com/unlight/wireit-package/commit/3d05de458f9284536811d7d85aec1605ad967bbe))
+* Several dependencies ([00a7119](https://github.com/unlight/wireit-package/commit/00a71194fa3cb0b80346b229bdb55b205b68416f))
+
+
+### Bug Fixes
+
+* Binary path ([8b2bd48](https://github.com/unlight/wireit-package/commit/8b2bd48350e318d52bfd9ba14671b9ea2ef4cb98))
+* Keep existing wireit commands ([7ffb449](https://github.com/unlight/wireit-package/commit/7ffb449e865864f19831a350dcd4d2ff1e7662c1))
