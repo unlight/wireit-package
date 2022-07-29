@@ -20,9 +20,13 @@ export async function update(args: UpdateArgs) {
   const workspaces = args.workspaces ?? (await getWorkspaces(cwd));
 
   const result = await topo({ workspaces, cwd });
+  const queue = [...result.queue].reverse();
 
-  for (const packageName of result.queue.reverse()) {
+  for (const packageName of queue) {
     const packageData = result.packages[packageName];
+
+    if (!packageData?.manifest.dependencies) continue;
+
     const dependencies: string[] = [];
     const wireit = {
       [name]: {
@@ -33,6 +37,9 @@ export async function update(args: UpdateArgs) {
 
     for (const [dependencyName] of Object.entries(packageData.manifest.dependencies)) {
       const dependencyPackage = result.packages[dependencyName];
+
+      if (!dependencyPackage) continue;
+
       const relative = path.posix.relative(
         packageData.absPath,
         dependencyPackage.absPath,
@@ -42,19 +49,19 @@ export async function update(args: UpdateArgs) {
     }
 
     if (dependencies.length > 0) {
-      packageData.manifest.wireit = wireit;
+      packageData.manifest['wireit'] = wireit;
     }
 
     await fs.writeFile(
       packageData.manifestPath,
-      JSON.stringify(packageData.manifest, null, 2),
+      JSON.stringify(packageData.manifest, undefined, 2),
     );
   }
 
   return result;
 }
 
-async function getWorkspaces(cwd: string) {
+async function getWorkspaces(cwd: string): Promise<string[]> {
   const packageJson = await readPackageJson(path.resolve(cwd, 'package.json'));
 
   return packageJson.workspaces;

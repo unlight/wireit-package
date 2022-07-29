@@ -30,8 +30,8 @@ Result:
 ## Development
 
 ```sh
-npm run -w wireit-package test:w
-npm run -w wireit-package build
+npm -w wireit-package run test:w
+npm -w wireit-package run build
 ```
 
 ## License

@@ -50,7 +50,7 @@ describe('playground', () => {
   });
 });
 
-describe('update command', () => {
+describe('single dependency', () => {
   before(() => {
     const volume = {
       '/root/package.json': JSON.stringify({
@@ -62,7 +62,7 @@ describe('update command', () => {
       }),
       '/root/packages/b/package.json': JSON.stringify({
         name: 'b',
-        dependencies: { a: '*' },
+        dependencies: { a: '*', unknown: '*' },
       }),
     };
     mockFs(volume);
@@ -72,7 +72,7 @@ describe('update command', () => {
     mockFs.restore();
   });
 
-  it('update command validate should fail', async () => {
+  it('update validate should fail', async () => {
     await expect(update({ command: '', name: '' })).rejects.toThrow(
       'command is required',
     );
@@ -81,7 +81,7 @@ describe('update command', () => {
     );
   });
 
-  it('update command', async () => {
+  it('update', async () => {
     await update({
       command: 'npm run build',
       name: 'build',
@@ -137,5 +137,58 @@ describe('update command seveal dependencies', () => {
 
     expect(wireit.build.command).toBe('npm run build');
     expect(wireit.build.dependencies).toEqual(['../a:build', '../b:build']);
+  });
+});
+
+describe('sequence', () => {
+  before(() => {
+    const volume = {
+      '/root/package.json': JSON.stringify({
+        workspaces: ['packages/*'],
+      }),
+      '/root/packages/a/package.json': JSON.stringify({
+        name: 'a',
+        dependencies: {},
+      }),
+      '/root/packages/b/package.json': JSON.stringify({
+        name: 'b',
+        dependencies: {
+          a: '*',
+        },
+      }),
+      '/root/packages/c/package.json': JSON.stringify({
+        name: 'c',
+        dependencies: {
+          b: '*',
+        },
+      }),
+    };
+    mockFs(volume);
+  });
+
+  after(() => {
+    mockFs.restore();
+  });
+
+  it('update', async () => {
+    await update({
+      command: 'npm run build',
+      name: 'build',
+      cwd: '/root',
+    });
+
+    const c = JSON.parse(fs.readFileSync('/root/packages/c/package.json').toString());
+
+    expect(c.wireit.build).toEqual({
+      command: 'npm run build',
+      dependencies: ['../b:build'],
+    });
+
+    const b = JSON.parse(fs.readFileSync('/root/packages/b/package.json').toString());
+
+    expect(b.wireit.build).toEqual({
+      command: 'npm run build',
+      dependencies: ['../a:build'],
+    });
   });
 });

@@ -4,7 +4,9 @@
   "version": "0.0.0-dev",
   "keywords": [
     "wireit",
-    "workspace"
+    "workspace",
+    "workspaces",
+    "packages"
   ],
   "workspaces": [
     "packages/wireit-package"
