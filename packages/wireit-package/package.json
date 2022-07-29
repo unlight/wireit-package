@@ -9,6 +9,9 @@
     "workspaces",
     "packages"
   ],
+  "files": [
+    "dist"
+  ],
   "bin": "./dist/cli.cjs",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
