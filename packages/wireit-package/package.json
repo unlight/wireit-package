@@ -19,6 +19,14 @@
       "require": "./dist/index.cjs"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unlight/wireit-package.git"
+  },
+  "bugs": {
+    "url": "https://github.com/unlight/wireit-package/issues"
+  },
+  "homepage": "https://github.com/unlight/wireit-package/tree/master/packages/wireit-package#readme",
   "scripts": {
     "test": "npm run eslint && npm run tscheck && npm run test:cov",
     "test:r": "npm run mocha -- src/**/*.spec.ts",
