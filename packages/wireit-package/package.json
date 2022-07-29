@@ -5,7 +5,9 @@
   "description": "Update wireit scripts across your workspace packages",
   "keywords": [
     "wireit",
-    "workspace"
+    "workspace",
+    "workspaces",
+    "packages"
   ],
   "bin": "./dist/cli.cjs",
   "main": "./dist/index.cjs",

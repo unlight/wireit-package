@@ -95,3 +95,47 @@ describe('update command', () => {
     expect(wireit.build.dependencies).toEqual(['../a:build']);
   });
 });
+
+describe('update command seveal dependencies', () => {
+  before(() => {
+    const volume = {
+      '/root/package.json': JSON.stringify({
+        workspaces: ['packages/*'],
+      }),
+      '/root/packages/a/package.json': JSON.stringify({
+        name: 'a',
+        dependencies: {},
+      }),
+      '/root/packages/b/package.json': JSON.stringify({
+        name: 'b',
+        dependencies: {},
+      }),
+      '/root/packages/c/package.json': JSON.stringify({
+        name: 'c',
+        dependencies: {
+          a: '*',
+          b: '*',
+        },
+      }),
+    };
+    mockFs(volume);
+  });
+
+  after(() => {
+    mockFs.restore();
+  });
+
+  it('update', async () => {
+    await update({
+      command: 'npm run build',
+      name: 'build',
+      cwd: '/root',
+    });
+
+    const c = fs.readFileSync('/root/packages/c/package.json').toString();
+    const { wireit } = JSON.parse(c);
+
+    expect(wireit.build.command).toBe('npm run build');
+    expect(wireit.build.dependencies).toEqual(['../a:build', '../b:build']);
+  });
+});

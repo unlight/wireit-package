@@ -23,7 +23,13 @@ export async function update(args: UpdateArgs) {
 
   for (const packageName of result.queue.reverse()) {
     const packageData = result.packages[packageName];
-    const wireit = {};
+    const dependencies: string[] = [];
+    const wireit = {
+      [name]: {
+        command,
+        dependencies,
+      },
+    };
 
     for (const [dependencyName] of Object.entries(packageData.manifest.dependencies)) {
       const dependencyPackage = result.packages[dependencyName];
@@ -32,13 +38,10 @@ export async function update(args: UpdateArgs) {
         dependencyPackage.absPath,
       );
 
-      wireit[name] = {
-        command,
-        dependencies: [`${relative}:${name}`],
-      };
+      dependencies.push(`${relative}:${name}`);
     }
 
-    if (Object.keys(wireit).length > 0) {
+    if (dependencies.length > 0) {
       packageData.manifest.wireit = wireit;
     }
 
