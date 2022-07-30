@@ -12,7 +12,7 @@ cli
   .option('--command <command>', 'Command description')
   .example(`${cliName} update --name build --command "npm run build"`)
   .action(options => {
-    update(options);
+    void update(options);
   });
 
 cli.help();
