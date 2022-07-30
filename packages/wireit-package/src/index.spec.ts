@@ -89,10 +89,11 @@ describe('single dependency', () => {
     });
 
     const b = fs.readFileSync('/root/packages/b/package.json').toString();
-    const { wireit } = JSON.parse(b);
+    const { wireit, scripts } = JSON.parse(b);
 
     expect(wireit.build.command).toBe('npm run build');
     expect(wireit.build.dependencies).toEqual(['../a:build']);
+    expect(scripts).toEqual({ build: 'wireit' });
   });
 });
 

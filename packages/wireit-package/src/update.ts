@@ -32,12 +32,14 @@ export async function update(args: UpdateArgs) {
     if (!manifest.dependencies) continue;
 
     const dependencies: string[] = [];
-    const wireit = (manifest['wireit'] as Record<string, unknown> | undefined) || {
-      [name]: {
-        command,
-        dependencies,
-      },
-    };
+
+    manifest['scripts'] ??= {};
+    manifest['scripts'][name] = 'wireit';
+
+    manifest['wireit'] ??= {};
+    manifest['wireit'][name] ??= {};
+    manifest['wireit'][name].command = command;
+    manifest['wireit'][name].dependencies = dependencies;
 
     for (const [dependencyName] of Object.entries(manifest.dependencies)) {
       const dependencyPackage = result.packages[dependencyName];
@@ -50,10 +52,8 @@ export async function update(args: UpdateArgs) {
     }
 
     if (dependencies.length > 0) {
-      manifest['wireit'] = wireit;
+      await fs.writeFile(manifestPath, JSON.stringify(manifest, undefined, 2));
     }
-
-    await fs.writeFile(manifestPath, JSON.stringify(manifest, undefined, 2));
   }
 
   return result;
