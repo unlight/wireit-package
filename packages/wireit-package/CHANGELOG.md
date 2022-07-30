@@ -1,3 +1,10 @@
+## [1.1.0](https://github.com/unlight/wireit-package/compare/wireit-package-v1.0.1...wireit-package-v1.1.0) (2022-07-30)
+
+
+### Features
+
+* Update scripts section ([63b0d84](https://github.com/unlight/wireit-package/commit/63b0d841b38dfd01b671723c0c35baef36d1a5ac))
+
 ## [1.0.1](https://github.com/unlight/wireit-package/compare/wireit-package-v1.0.0...wireit-package-v1.0.1) (2022-07-29)
 
 
