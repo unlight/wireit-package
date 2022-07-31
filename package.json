@@ -1,7 +1,7 @@
 {
   "name": "wireit-package-project",
   "private": true,
-  "version": "0.0.0-dev",
+  "version": "0.0.0-dev.0",
   "keywords": [
     "wireit",
     "workspace",
