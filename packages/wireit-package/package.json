@@ -1,6 +1,6 @@
 {
   "name": "wireit-package",
-  "version": "0.0.0-dev",
+  "version": "1.1.1",
   "license": "MIT",
   "description": "Update wireit scripts across your workspace packages",
   "keywords": [
