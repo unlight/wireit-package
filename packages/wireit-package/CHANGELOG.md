@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/unlight/wireit-package/compare/wireit-package-v1.1.1...wireit-package-v1.1.2) (2022-07-31)
+
+
+### Bug Fixes
+
+* **ci:** Switch back ci with unknown version ([66499dd](https://github.com/unlight/wireit-package/commit/66499dd4ce1cfb98178e62ab378c3e971f1e5cb3))
+
 ## [1.1.1](https://github.com/unlight/wireit-package/compare/wireit-package-v1.1.0...wireit-package-v1.1.1) (2022-07-31)
 
 
