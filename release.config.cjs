@@ -17,10 +17,17 @@ module.exports = {
     [
       '@semantic-release/npm',
       {
-        pkgRoot: '.',
+        npmPublish: false,
+        pkgRoot: './dist',
       },
     ],
-    '@semantic-release/github',
+    [
+      '@semantic-release/exec',
+      {
+        publishCmd: "npm publish ./dist --tag ${nextRelease.channel || 'latest'}",
+      },
+    ],
     '@semantic-release/git',
+    '@semantic-release/github',
   ],
 };
