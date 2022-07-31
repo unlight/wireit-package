@@ -1,3 +1,11 @@
+## [1.1.3](https://github.com/unlight/wireit-package/compare/wireit-package-v1.1.2...wireit-package-v1.1.3) (2022-07-31)
+
+
+### Bug Fixes
+
+* Test commit ([d5363f3](https://github.com/unlight/wireit-package/commit/d5363f3234615ba448e8b0805ddb34b63d0658b5))
+* Update README ([628e2a8](https://github.com/unlight/wireit-package/commit/628e2a8b62ee9dc1074cb3d1c03f35f050c7a701))
+
 ## [1.1.0](https://github.com/unlight/wireit-package/compare/wireit-package-v1.0.1...wireit-package-v1.1.0) (2022-07-30)
 
 ### Features
