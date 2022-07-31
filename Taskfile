@@ -2,14 +2,30 @@
 PATH="$PWD/node_modules/.bin":$PATH
 set -e
 
+build_pkgroll_dist() {
+  set -x
+  rm -rf dist
+  mkdir dist
+  # https://esbuild.github.io/api/#target
+  npx pkgroll --target=es2020
+  set +x
+}
+
 build_pkgroll() {
   set -x
   rm -rf dist
   mkdir dist
   # https://esbuild.github.io/api/#target
   npx pkgroll --target=es2020
-  cp src/bin.cjs ./dist
   rm dist/cli.mjs
+  cp -f README.md dist
+  cat package.json | jq '.main = "./index.cjs"' |
+    jq '.module = "./index.mjs"' |
+    jq '.types = "./index.d.ts"' |
+    jq '.bin = "./cli.cjs"' |
+    jq '.exports.".".import = "./index.mjs"' |
+    jq '.exports.".".require = "./index.cjs"' \
+      >dist/package.json
   set +x
 }
 

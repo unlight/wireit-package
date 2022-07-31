@@ -1,6 +1,6 @@
 {
   "name": "wireit-package",
-  "version": "1.1.0",
+  "version": "0.0.0-dev",
   "license": "MIT",
   "description": "Update wireit scripts across your workspace packages",
   "keywords": [
@@ -8,9 +8,6 @@
     "workspace",
     "workspaces",
     "packages"
-  ],
-  "files": [
-    "dist"
   ],
   "bin": "./dist/cli.cjs",
   "main": "./dist/index.cjs",
